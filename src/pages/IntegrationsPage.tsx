@@ -7,6 +7,7 @@ import { MockIntegrationRepository } from "../repositories/integrations/MockInte
 import { IntegrationService } from "../services/integrations/IntegrationService";
 
 import { CapabilityCoverage } from "../components/integrations/CapabilityCoverage/CapabilityCoverage";
+import { ConnectedIntegrationsPanel } from "../components/integrations/ConnectedIntegrationsPanel/ConnectedIntegrationsPanel";
 
 const integrationService = new IntegrationService(
   new MockIntegrationRepository(),
@@ -49,17 +50,9 @@ export function IntegrationsPage() {
         integrations={integrations}
       />
 
-      <section>
-        <h2>Connected</h2>
-
-        {integrations.map((integration) => (
-          <article key={integration.id}>
-            <strong>{integration.name}</strong>
-            <span>{integration.providerId}</span>
-            <span>{integration.status}</span>
-          </article>
-        ))}
-      </section>
+      <ConnectedIntegrationsPanel
+        integrations={integrations}
+      />
 
       <section>
         <h2>Available integrations</h2>
