@@ -1,0 +1,252 @@
+.connected-integrations-panel {
+  margin-top: var(--space-xl);
+
+  overflow: hidden;
+
+  border:
+    0.0625rem
+    solid
+    var(--color-border);
+
+  border-radius: var(--radius-lg);
+
+  background: var(--color-surface);
+
+  box-shadow: var(--shadow-sm);
+}
+
+.connected-integrations-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+
+  padding:
+    1.25rem
+    1.5rem;
+
+  border-bottom:
+    0.0625rem
+    solid
+    var(--color-border);
+}
+
+.connected-integrations-panel__eyebrow {
+  display: block;
+
+  margin-bottom: 0.25rem;
+
+  color: var(--color-orange);
+
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.connected-integrations-panel__header h2 {
+  margin: 0;
+
+  font-size: 1.15rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.connected-integrations-panel__count {
+  min-width: 2rem;
+  height: 2rem;
+
+  display: grid;
+  place-items: center;
+
+  color: var(--color-orange);
+
+  font-size: 0.8rem;
+  font-weight: 700;
+
+  border-radius: 999rem;
+
+  background: var(--color-orange-subtle);
+}
+
+.connected-integrations-panel__list {
+  display: grid;
+}
+
+.connected-integrations-panel__item {
+  display: grid;
+  grid-template-columns:
+    minmax(10rem, 1.2fr)
+    minmax(16rem, 2fr)
+    auto;
+
+  align-items: center;
+  gap: var(--space-lg);
+
+  padding:
+    1rem
+    1.5rem;
+}
+
+.connected-integrations-panel__item
+  + .connected-integrations-panel__item {
+  border-top:
+    0.0625rem
+    solid
+    var(--color-border);
+}
+
+.connected-integrations-panel__identity {
+  min-width: 0;
+
+  display: grid;
+  gap: 0.2rem;
+}
+
+.connected-integrations-panel__identity strong {
+  color: var(--color-text-primary);
+
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.connected-integrations-panel__identity span {
+  color: var(--color-text-muted);
+
+  font-size: 0.72rem;
+  text-transform: capitalize;
+}
+
+.connected-integrations-panel__capabilities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.connected-integrations-panel__capabilities span {
+  padding:
+    0.3rem
+    0.5rem;
+
+  color: var(--color-text-secondary);
+
+  font-size: 0.68rem;
+  font-weight: 600;
+
+  border:
+    0.0625rem
+    solid
+    var(--color-border);
+
+  border-radius: 999rem;
+
+  background: var(--color-surface-muted);
+}
+
+.connected-integrations-panel__status {
+  justify-self: end;
+
+  padding:
+    0.35rem
+    0.55rem;
+
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: capitalize;
+
+  border-radius: 999rem;
+
+  color: var(--color-text-secondary);
+  background: var(--color-surface-muted);
+}
+
+.connected-integrations-panel__status[data-status="connected"] {
+  color: var(--color-success);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--color-success) 10%,
+      transparent
+    );
+}
+
+.connected-integrations-panel__status[data-status="error"] {
+  color: var(--color-danger);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--color-danger) 10%,
+      transparent
+    );
+}
+
+.connected-integrations-panel__status[data-status="pending"] {
+  color: var(--color-orange);
+
+  background: var(--color-orange-subtle);
+}
+
+.connected-integrations-panel__controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+}
+
+.connected-integrations-panel__controls button {
+  padding:
+    0.4rem
+    0.65rem;
+
+  color: var(--color-text-secondary);
+
+  font-size: 0.72rem;
+  font-weight: 600;
+
+  border:
+    0.0625rem
+    solid
+    var(--color-border);
+
+  border-radius: var(--radius-sm);
+
+  background: var(--color-surface);
+
+  cursor: pointer;
+}
+
+.connected-integrations-panel__controls button:hover {
+  color: var(--color-text-primary);
+
+  background: var(--color-surface-muted);
+}
+
+.connected-integrations-panel__delete:hover {
+  color: var(--color-danger);
+}
+
+@media (max-width: 64rem) {
+  .connected-integrations-panel__controls {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 64rem) {
+  .connected-integrations-panel__item {
+    grid-template-columns: 1fr;
+  }
+
+  .connected-integrations-panel__status {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 48rem) {
+  .connected-integrations-panel__header,
+  .connected-integrations-panel__item {
+    padding-inline: 1rem;
+  }
+}
