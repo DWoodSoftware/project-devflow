@@ -1,0 +1,208 @@
+.capability-coverage {
+  margin-block: var(--space-xl);
+
+  overflow: hidden;
+
+  border:
+    0.0625rem
+    solid
+    var(--color-border);
+
+  border-radius: var(--radius-lg);
+
+  background: var(--color-surface);
+
+  box-shadow: var(--shadow-sm);
+}
+
+.capability-coverage__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xl);
+
+  padding:
+    1.25rem
+    1.5rem;
+
+  border-bottom:
+    0.0625rem
+    solid
+    var(--color-border);
+}
+
+.capability-coverage__header > div:first-child {
+  min-width: 0;
+}
+
+.capability-coverage__eyebrow {
+  display: block;
+
+  margin-bottom: 0.25rem;
+
+  color: var(--color-cobalt);
+
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.capability-coverage__header h2 {
+  margin: 0;
+
+  color: var(--color-text-primary);
+
+  font-size: 1.15rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.capability-coverage__header p {
+  margin:
+    0.35rem
+    0
+    0;
+
+  color: var(--color-text-secondary);
+
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.capability-coverage__summary {
+  flex: 0 0 auto;
+
+  display: grid;
+
+  text-align: right;
+}
+
+.capability-coverage__summary strong {
+  color: var(--color-text-primary);
+
+  font-size: 1.75rem;
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.capability-coverage__summary span {
+  margin-top: 0.25rem;
+
+  color: var(--color-text-muted);
+
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.capability-coverage__grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+}
+
+.capability-coverage__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+
+  min-width: 0;
+
+  padding:
+    1rem
+    1.5rem;
+
+  border-bottom:
+    0.0625rem
+    solid
+    var(--color-border);
+}
+
+.capability-coverage__item:nth-child(odd) {
+  border-right:
+    0.0625rem
+    solid
+    var(--color-border);
+}
+
+.capability-coverage__indicator {
+  flex: 0 0 auto;
+
+  width: 1.75rem;
+  height: 1.75rem;
+
+  display: grid;
+  place-items: center;
+
+  color: var(--color-text-muted);
+
+  font-size: 0.85rem;
+  font-weight: 700;
+
+  border-radius: 50%;
+
+  background: var(--color-surface-muted);
+}
+
+.capability-coverage__item[data-fulfilled="true"]
+  .capability-coverage__indicator {
+  color: var(--color-success);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--color-success) 10%,
+      transparent
+    );
+}
+
+.capability-coverage__item > div {
+  min-width: 0;
+
+  display: grid;
+  gap: 0.2rem;
+}
+
+.capability-coverage__item strong {
+  color: var(--color-text-primary);
+
+  font-size: 0.85rem;
+  font-weight: 650;
+}
+
+.capability-coverage__item > div > span {
+  color: var(--color-text-muted);
+
+  font-size: 0.72rem;
+}
+
+.capability-coverage__item[data-fulfilled="true"]
+  > div
+  > span {
+  color: var(--color-success);
+}
+
+@media (max-width: 48rem) {
+  .capability-coverage__header {
+    align-items: flex-start;
+
+    padding-inline: 1rem;
+  }
+
+  .capability-coverage__summary {
+    text-align: right;
+  }
+
+  .capability-coverage__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .capability-coverage__item {
+    padding-inline: 1rem;
+  }
+
+  .capability-coverage__item:nth-child(odd) {
+    border-right: 0;
+  }
+}
