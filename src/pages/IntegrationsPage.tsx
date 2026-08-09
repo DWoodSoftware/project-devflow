@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import type { IntegrationProvider } from "../domain/integrations/IntegrationProvider";
 import type { ProjectIntegration } from "../domain/integrations/ProjectIntegration";
+import type { CapabilityId } from "../domain/capabilities/Capability";
 
 import { MockIntegrationRepository } from "../repositories/integrations/MockIntegrationRepository";
 import { IntegrationService } from "../services/integrations/IntegrationService";
@@ -63,11 +64,13 @@ export function IntegrationsPage() {
 
   const handleConnectProvider = async (
     provider: IntegrationProvider,
+    selectedCapabiltiies?: readonly CapabilityId[]
   ) => {
     await integrationService.createProjectIntegration({
       projectId: MOCK_PROJECT_ID,
       providerId: provider.id,
       name: provider.name,
+      capabilities: selectedCapabiltiies,
     });
 
     const updatedIntegrations =

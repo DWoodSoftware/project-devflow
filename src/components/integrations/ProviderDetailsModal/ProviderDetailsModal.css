@@ -204,6 +204,108 @@
   background: var(--color-cobalt);
 }
 
+.provider-details-modal__capability-selector {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.provider-details-modal__capability-selector > h3 {
+  margin: 0;
+}
+
+.provider-details-modal__capability-selector > p {
+  margin: 0;
+
+  color: var(--color-text-secondary);
+
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.provider-details-modal__capability-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  margin-top: var(--space-xs);
+}
+
+.provider-details-modal__capability-pills button {
+  padding:
+    0.45rem
+    0.7rem;
+
+  color: var(--color-text-secondary);
+
+  font-size: 0.72rem;
+  font-weight: 650;
+
+  border:
+    0.0625rem
+    solid
+    var(--color-border);
+
+  border-radius: 999rem;
+
+  background: var(--color-surface-muted);
+
+  cursor: pointer;
+
+  transition:
+    color 140ms ease,
+    border-color 140ms ease,
+    background 140ms ease,
+    transform 140ms ease;
+}
+
+.provider-details-modal__capability-pills button:hover {
+  color: var(--color-text-primary);
+
+  border-color: var(--color-border-strong);
+
+  background: var(--color-surface-raised);
+}
+
+.provider-details-modal__capability-pills button[data-selected="true"] {
+  color: var(--color-cobalt);
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--color-cobalt) 35%,
+      var(--color-border)
+    );
+
+  background: var(--color-cobalt-subtle);
+}
+
+.provider-details-modal__capability-pills button[data-selected="true"]::before {
+  content: "✓";
+
+  margin-right: 0.35rem;
+
+  font-size: 0.68rem;
+}
+
+.provider-details-modal__capability-pills button:active {
+  transform: translateY(0.0625rem);
+}
+
+.provider-details-modal__capability-pills button:focus-visible {
+  outline:
+    0.125rem
+    solid
+    var(--color-cobalt);
+
+  outline-offset: 0.125rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .provider-details-modal__capability-pills button {
+    transition: none;
+  }
+}
+
 @media (max-width: 48rem) {
   .provider-details-modal__backdrop {
     padding: var(--space-sm);

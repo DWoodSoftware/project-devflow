@@ -1,3 +1,7 @@
+import { useState } from "react";
+
+import type { CapabilityId } from "../../../domain/capabilities/Capability";
+import { capabilities } from "../../../domain/capabilities/capabilities";
 import type { IntegrationProvider } from "../../../domain/integrations/IntegrationProvider";
 
 import "./ProviderDetailsModal.css";
@@ -5,7 +9,10 @@ import "./ProviderDetailsModal.css";
 interface ProviderDetailsModalProps {
   provider: IntegrationProvider;
   onClose: () => void;
-  onConnect: (provider: IntegrationProvider) => void;
+  onConnect: (
+    provider: IntegrationProvider,
+    capabilities?: readonly CapabilityId[],
+  ) => void;
 }
 
 export function ProviderDetailsModal({
@@ -13,6 +20,30 @@ export function ProviderDetailsModal({
   onClose,
   onConnect,
 }: ProviderDetailsModalProps) {
+  const isCustomWebhook =
+    provider.id === "custom-webhook";
+
+  const [selectedCapabilities, setSelectedCapabilities] =
+    useState<CapabilityId[]>(["webhook"]);
+
+  const selectableCapabilities =
+    Object.values(capabilities).filter(
+      (capability) =>
+        capability.id !== "webhook",
+    );
+
+  const toggleCapability = (
+    capabilityId: CapabilityId,
+  ) => {
+    setSelectedCapabilities((current) =>
+      current.includes(capabilityId)
+        ? current.filter(
+            (id) => id !== capabilityId,
+          )
+        : [...current, capabilityId],
+    );
+  };
+
   return (
     <div
       className="provider-details-modal__backdrop"
@@ -59,11 +90,47 @@ export function ProviderDetailsModal({
               {provider.capabilities.map((capability) => (
                 <article key={capability.id}>
                   <strong>{capability.name}</strong>
-                  <span>{capability.description}</span>
+
+                  <span>
+                    {capability.description}
+                  </span>
                 </article>
               ))}
             </div>
           </section>
+
+          {isCustomWebhook && (
+            <section className="provider-details-modal__capability-selector">
+                <h3>Webhook capabilities</h3>
+
+                <p>
+                Choose which workflow capabilities this webhook
+                should satisfy for automation.
+                </p>
+
+                <div className="provider-details-modal__capability-pills">
+                {selectableCapabilities.map((capability) => {
+                    const selected =
+                    selectedCapabilities.includes(
+                        capability.id,
+                    );
+
+                    return (
+                    <button
+                        key={capability.id}
+                        type="button"
+                        data-selected={selected}
+                        onClick={() =>
+                        toggleCapability(capability.id)
+                        }
+                    >
+                        {capability.name}
+                    </button>
+                    );
+                })}
+                </div>
+            </section>
+            )}
 
           <div className="provider-details-modal__metadata">
             <span>
@@ -86,7 +153,14 @@ export function ProviderDetailsModal({
           <button
             type="button"
             className="provider-details-modal__connect"
-            onClick={() => onConnect(provider)}
+            onClick={() =>
+                onConnect(
+                    provider,
+                    isCustomWebhook
+                    ? selectedCapabilities
+                    : undefined,
+                )
+            }
           >
             Connect {provider.name}
           </button>
