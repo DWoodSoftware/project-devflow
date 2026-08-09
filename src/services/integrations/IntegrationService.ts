@@ -57,4 +57,12 @@ export class IntegrationService {
       integrationId,
     );
   }
+
+  public async reconnectProjectIntegration(
+    integrationId: string,
+  ): Promise<ProjectIntegration> {
+    return this.repository.reconnectProjectIntegration(
+      integrationId,
+    );
+  }
 }

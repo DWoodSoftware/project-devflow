@@ -134,4 +134,17 @@ export class MockIntegrationRepository
 
     return entry[0] as keyof typeof integrationProviders;
   }
+
+  public async reconnectProjectIntegration(
+    integrationId: string,
+  ): Promise<ProjectIntegration> {
+    const integration =
+      this.findIntegration(integrationId);
+
+    integration.status = "connected";
+    integration.updatedAt =
+      new Date().toISOString();
+
+    return structuredClone(integration);
+  }
 }

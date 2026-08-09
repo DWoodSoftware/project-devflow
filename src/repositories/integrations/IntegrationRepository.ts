@@ -31,4 +31,8 @@ export interface IntegrationRepository {
   deleteProjectIntegration(
     integrationId: string,
   ): Promise<void>;
+
+  reconnectProjectIntegration(
+    integrationId: string,
+  ): Promise<ProjectIntegration>;
 }
