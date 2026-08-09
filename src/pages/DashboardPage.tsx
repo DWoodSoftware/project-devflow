@@ -108,11 +108,9 @@ export function DashboardPage() {
         projects={dashboard.activeProjects}
       />
 
-      {dashboard.nextRelease && (
-        <NextReleasePanel
-          release={dashboard.nextRelease}
-        />
-      )}
+      <NextReleasePanel
+        release={dashboard.nextRelease}
+      />
     </section>
   );
 }

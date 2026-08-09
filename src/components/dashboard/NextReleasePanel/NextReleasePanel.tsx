@@ -1,14 +1,24 @@
 import type { ReleaseSummary } from "../../../domain/dashboard/ReleaseSummary";
+import { AppState } from "../../common/AppState/AppState";
 
 import "./NextReleasePanel.css";
 
 interface NextReleasePanelProps {
-  release: ReleaseSummary;
+  release: ReleaseSummary | null;
 }
 
 export function NextReleasePanel({
   release,
 }: NextReleasePanelProps) {
+  if (!release) {
+    return (
+      <AppState
+        variant="empty"
+        title="Nothing waiting at the gate."
+        message="There's no release being prepared yet. Once work clears QA, it'll show up here."
+      />
+    );
+  }
   return (
     <section className="next-release-panel">
       <header className="next-release-panel__header">
