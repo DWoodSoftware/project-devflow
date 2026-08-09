@@ -1,4 +1,5 @@
 import type { ProjectSummary } from "../../../domain/dashboard/ProjectSummary";
+import { AppState } from "../../common/AppState/AppState";
 
 import "./ActiveProjectsPanel.css";
 
@@ -9,6 +10,16 @@ interface ActiveProjectsPanelProps {
 export function ActiveProjectsPanel({
   projects,
 }: ActiveProjectsPanelProps) {
+  if (projects.length === 0) {
+    return (
+      <AppState
+        variant="empty"
+        title="No plates spinning."
+        message="You don't have any active projects right now. Frankly, that sounds quite peaceful."
+      />
+    );
+  }
+  
   return (
     <section className="active-projects-panel">
       <header className="active-projects-panel__header">
