@@ -1,4 +1,5 @@
 import type { AttentionItem } from "../../../domain/dashboard/AttentionItem";
+import { AppState } from "../../common/AppState/AppState";
 
 import "./AttentionPanel.css";
 
@@ -9,6 +10,15 @@ interface AttentionPanelProps {
 export function AttentionPanel({
   items,
 }: AttentionPanelProps) {
+  if (items.length === 0) {
+    return (
+      <AppState
+        variant="success"
+        title="Nothing's on fire."
+        message="No failed builds, blocked work or QA gates need your attention. Enjoy it while it lasts."
+      />
+    );
+  }
   return (
     <section className="attention-panel">
       <header className="attention-panel__header">
