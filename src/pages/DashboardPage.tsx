@@ -5,6 +5,7 @@ import { MockDashboardRepository } from "../repositories/dashboard/MockDashboard
 import { DashboardService } from "../services/dashboard/DashboardService";
 
 import { DashboardMetricCard } from "../components/dashboard/DashboardMetricCard/DashboardMetricCard";
+import { AttentionPanel } from "../components/dashboard/AttentionPanel/AttentionPanel";
 
 import "../styles/DashboardPage.css"
 
@@ -65,22 +66,9 @@ export function DashboardPage() {
         />
       </section>
 
-      <section className="dashboard__section">
-        <header>
-          <h2>Needs attention</h2>
-        </header>
-
-        {dashboard.attentionItems.map((item) => (
-          <article key={item.id}>
-            <div>
-              <strong>{item.title}</strong>
-              <span>{item.projectName}</span>
-            </div>
-
-            <span>{item.type}</span>
-          </article>
-        ))}
-      </section>
+      <AttentionPanel
+        items={dashboard.attentionItems}
+      />
 
       <section className="dashboard__section">
         <header>
