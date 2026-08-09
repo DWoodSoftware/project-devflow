@@ -1,0 +1,136 @@
+.app-state {
+  width: min(100%, 42rem);
+  margin-inline: auto;
+
+  display: grid;
+  justify-items: center;
+  gap: var(--space-lg);
+
+  padding:
+    clamp(2rem, 5vw, 3.5rem)
+    clamp(1.5rem, 4vw, 2.5rem);
+
+  text-align: center;
+
+  border:
+    0.0625rem
+    solid
+    var(--color-border);
+
+  border-radius: var(--radius-lg);
+
+  background: var(--color-surface);
+
+  box-shadow: var(--shadow-sm);
+}
+
+.app-state__icon {
+  width: 3rem;
+  height: 3rem;
+
+  display: grid;
+  place-items: center;
+
+  color: var(--color-cobalt);
+
+  font-size: 1.4rem;
+  font-weight: 700;
+
+  border-radius: 50%;
+
+  background: var(--color-cobalt-subtle);
+}
+
+.app-state[data-variant="error"] .app-state__icon {
+  color: var(--color-danger);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--color-danger) 10%,
+      transparent
+    );
+}
+
+.app-state[data-variant="empty"] .app-state__icon {
+  color: var(--color-orange);
+
+  background: var(--color-orange-subtle);
+}
+
+.app-state[data-variant="success"] .app-state__icon {
+  color: var(--color-success);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--color-success) 10%,
+      transparent
+    );
+}
+
+.app-state__content {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-sm);
+}
+
+.app-state__content h2 {
+  margin: 0;
+
+  color: var(--color-text-primary);
+
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+  font-weight: 650;
+  letter-spacing: -0.03em;
+}
+
+.app-state__content p {
+  margin: 0;
+
+  max-width: 34rem;
+
+  color: var(--color-text-secondary);
+
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.app-state__content button {
+  margin-top: var(--space-sm);
+
+  padding:
+    0.65rem
+    0.95rem;
+
+  color: var(--color-text-inverse);
+
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  border: 0;
+  border-radius: var(--radius-md);
+
+  background: var(--color-cobalt);
+
+  cursor: pointer;
+
+  transition:
+    filter 140ms ease,
+    transform 140ms ease;
+}
+
+.app-state__content button:hover {
+  filter: brightness(1.05);
+}
+
+.app-state__content button:active {
+  transform: translateY(0.0625rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-state__content button {
+    transition: none;
+  }
+}
