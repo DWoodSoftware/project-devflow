@@ -1,0 +1,188 @@
+.active-projects-panel {
+  margin-top: var(--space-xl);
+
+  overflow: hidden;
+
+  border:
+    0.0625rem
+    solid
+    var(--color-border);
+
+  border-radius: var(--radius-lg);
+
+  background: var(--color-surface);
+
+  box-shadow: var(--shadow-sm);
+}
+
+.active-projects-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding:
+    1.25rem
+    1.5rem;
+
+  border-bottom:
+    0.0625rem
+    solid
+    var(--color-border);
+}
+
+.active-projects-panel__eyebrow {
+  display: block;
+
+  margin-bottom: 0.25rem;
+
+  color: var(--color-cobalt);
+
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.active-projects-panel__header h2 {
+  margin: 0;
+
+  font-size: 1.15rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.active-projects-panel__count {
+  min-width: 2rem;
+  height: 2rem;
+
+  display: grid;
+  place-items: center;
+
+  color: var(--color-cobalt);
+
+  font-size: 0.8rem;
+  font-weight: 700;
+
+  border-radius: 999rem;
+
+  background: var(--color-cobalt-subtle);
+}
+
+.active-projects-panel__list {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+}
+
+.active-projects-panel__project {
+  min-width: 0;
+
+  padding: 1.5rem;
+}
+
+.active-projects-panel__project + .active-projects-panel__project {
+  border-left:
+    0.0625rem
+    solid
+    var(--color-border);
+}
+
+.active-projects-panel__project-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: var(--space-md);
+
+  margin-bottom: 1rem;
+}
+
+.active-projects-panel__project-header strong {
+  font-size: 0.95rem;
+  font-weight: 650;
+}
+
+.active-projects-panel__project-header span {
+  color: var(--color-text-secondary);
+
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.active-projects-panel__progress {
+  width: 100%;
+  height: 0.35rem;
+
+  overflow: hidden;
+
+  border-radius: 999rem;
+
+  background: var(--color-surface-muted);
+}
+
+.active-projects-panel__progress > span {
+  display: block;
+
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: var(--color-cobalt);
+}
+
+.active-projects-panel__stats {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: var(--space-sm);
+
+  margin:
+    1.25rem
+    0
+    0;
+}
+
+.active-projects-panel__stats div {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.active-projects-panel__stats dt {
+  color: var(--color-text-muted);
+
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.active-projects-panel__stats dd {
+  margin: 0;
+
+  color: var(--color-text-primary);
+
+  font-size: 1rem;
+  font-weight: 650;
+}
+
+@media (max-width: 64rem) {
+  .active-projects-panel__list {
+    grid-template-columns: 1fr;
+  }
+
+  .active-projects-panel__project + .active-projects-panel__project {
+    border-top:
+      0.0625rem
+      solid
+      var(--color-border);
+
+    border-left: 0;
+  }
+}
+
+@media (max-width: 48rem) {
+  .active-projects-panel__header,
+  .active-projects-panel__project {
+    padding-inline: 1rem;
+  }
+}

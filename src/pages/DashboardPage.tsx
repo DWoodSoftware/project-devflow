@@ -6,6 +6,7 @@ import { DashboardService } from "../services/dashboard/DashboardService";
 
 import { DashboardMetricCard } from "../components/dashboard/DashboardMetricCard/DashboardMetricCard";
 import { AttentionPanel } from "../components/dashboard/AttentionPanel/AttentionPanel";
+import { ActiveProjectsPanel } from "../components/dashboard/ActiveProjectsPanel/ActiveProjectsPanel";
 
 import "../styles/DashboardPage.css"
 
@@ -70,27 +71,9 @@ export function DashboardPage() {
         items={dashboard.attentionItems}
       />
 
-      <section className="dashboard__section">
-        <header>
-          <h2>Active projects</h2>
-        </header>
-
-        {dashboard.activeProjects.map((project) => (
-          <article key={project.id}>
-            <div>
-              <strong>{project.name}</strong>
-              <span>{project.progress}% complete</span>
-            </div>
-
-            <progress
-              value={project.progress}
-              max="100"
-            >
-              {project.progress}%
-            </progress>
-          </article>
-        ))}
-      </section>
+      <ActiveProjectsPanel
+        projects={dashboard.activeProjects}
+      />
 
       {dashboard.nextRelease && (
         <section className="dashboard__section">
