@@ -7,6 +7,7 @@ import { DashboardService } from "../services/dashboard/DashboardService";
 import { DashboardMetricCard } from "../components/dashboard/DashboardMetricCard/DashboardMetricCard";
 import { AttentionPanel } from "../components/dashboard/AttentionPanel/AttentionPanel";
 import { ActiveProjectsPanel } from "../components/dashboard/ActiveProjectsPanel/ActiveProjectsPanel";
+import { NextReleasePanel } from "../components/dashboard/NextReleasePanel/NextReleasePanel";
 
 import "../styles/DashboardPage.css"
 
@@ -76,27 +77,9 @@ export function DashboardPage() {
       />
 
       {dashboard.nextRelease && (
-        <section className="dashboard__section">
-          <header>
-            <h2>Next release</h2>
-          </header>
-
-          <article>
-            <strong>
-              {dashboard.nextRelease.version}
-            </strong>
-
-            <span>
-              {dashboard.nextRelease.projectName}
-            </span>
-
-            <p>
-              {dashboard.nextRelease.issueCount} issues ·{" "}
-              {dashboard.nextRelease.pullRequestCount} PRs ·{" "}
-              {dashboard.nextRelease.qaPendingCount} awaiting QA
-            </p>
-          </article>
-        </section>
+        <NextReleasePanel
+          release={dashboard.nextRelease}
+        />
       )}
     </section>
   );
