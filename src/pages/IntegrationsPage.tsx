@@ -35,14 +35,29 @@ export function IntegrationsPage() {
   }, []);
 
   
-const handleDisconnect = async (
-  integrationId: string,
-) => {
-  await integrationService.disconnectProjectIntegration(
-    integrationId,
-  );
+  const handleDisconnect = async (
+    integrationId: string,
+  ) => {
+    await integrationService.disconnectProjectIntegration(
+      integrationId,
+    );
 
-  const updatedIntegrations =
+    const updatedIntegrations =
+        await integrationService.getProjectIntegrations(
+          MOCK_PROJECT_ID,
+        );
+
+      setIntegrations(updatedIntegrations);
+    };
+
+  const handleDelete = async (
+    integrationId: string,
+  ) => {
+    await integrationService.deleteProjectIntegration(
+      integrationId,
+    );
+
+    const updatedIntegrations =
       await integrationService.getProjectIntegrations(
         MOCK_PROJECT_ID,
       );
@@ -50,10 +65,10 @@ const handleDisconnect = async (
     setIntegrations(updatedIntegrations);
   };
 
-  const handleDelete = async (
+  const handleReconnect = async (
     integrationId: string,
   ) => {
-    await integrationService.deleteProjectIntegration(
+    await integrationService.reconnectProjectIntegration(
       integrationId,
     );
 
@@ -84,6 +99,7 @@ const handleDisconnect = async (
       <ConnectedIntegrationsPanel
         integrations={integrations}
         onDisconnect={handleDisconnect}
+        onReconnect={handleReconnect}
         onDelete={handleDelete}
       />
 

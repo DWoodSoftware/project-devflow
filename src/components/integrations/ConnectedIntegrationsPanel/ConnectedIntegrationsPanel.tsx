@@ -9,6 +9,10 @@ interface ConnectedIntegrationsPanelProps {
     integrationId: string,
   ) => void;
 
+  onReconnect: (
+    integrationId: string,
+  ) => void;
+
   onDelete: (
     integrationId: string,
   ) => void;
@@ -17,6 +21,7 @@ interface ConnectedIntegrationsPanelProps {
 export function ConnectedIntegrationsPanel({
   integrations,
   onDisconnect,
+  onReconnect,
   onDelete,
 }: ConnectedIntegrationsPanelProps) {
   return (
@@ -70,6 +75,17 @@ export function ConnectedIntegrationsPanel({
                   }
                 >
                   Disconnect
+                </button>
+              )}
+
+              {integration.status === "disconnected" && (
+                <button
+                  type="button"
+                  onClick={() =>
+                    onReconnect(integration.id)
+                  }
+                >
+                  Reconnect
                 </button>
               )}
 
