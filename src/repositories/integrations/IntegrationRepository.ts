@@ -3,6 +3,8 @@ import type {
   IntegrationProviderId,
 } from "../../domain/integrations/IntegrationProvider";
 
+import type { CapabilityId } from "../../domain/capabilities/Capability";
+
 import type {
   ProjectIntegration,
 } from "../../domain/integrations/ProjectIntegration";
@@ -11,6 +13,7 @@ export interface CreateProjectIntegrationInput {
   projectId: string;
   providerId: IntegrationProviderId;
   name: string;
+  capabilities?: readonly CapabilityId[];
 }
 
 export interface IntegrationRepository {

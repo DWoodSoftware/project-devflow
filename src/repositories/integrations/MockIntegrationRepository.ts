@@ -54,7 +54,8 @@ export class MockIntegrationRepository
       status: "connected",
 
       capabilities:
-        provider.capabilities.map(
+      input.capabilities
+        ?? provider.capabilities.map(
           (capability) => capability.id,
         ),
 
