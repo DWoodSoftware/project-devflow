@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { AppState } from "../components/common/AppState/AppState";
+
 import type { DashboardSummary } from "../domain/dashboard/DashboardSummary";
 import { MockDashboardRepository } from "../repositories/dashboard/MockDashboardRepository";
 import { DashboardService } from "../services/dashboard/DashboardService";
@@ -19,14 +21,44 @@ export function DashboardPage() {
   const [dashboard, setDashboard] =
     useState<DashboardSummary | null>(null);
 
+  const [error, setError] =
+    useState<Error | null>(null);
+
   useEffect(() => {
     dashboardService
       .getSummary()
-      .then(setDashboard);
+      .then(setDashboard)
+      .catch((caughtError: unknown) => {
+        setError(
+          caughtError instanceof Error
+            ? caughtError
+            : new Error("Failed to load dashboard"),
+        );
+      });
   }, []);
 
+  if (error) {
+    return (
+      <AppState
+        variant="error"
+        title="Well, that's inconvenient."
+        message="We couldn't load your dashboard. The good news is your code probably didn't cause this one."
+        action={{
+          label: "Try again",
+          onClick: () => window.location.reload(),
+        }}
+      />
+    );
+  }
+
   if (!dashboard) {
-    return <p>Loading dashboard...</p>;
+    return (
+      <AppState
+        variant="loading"
+        title="Getting the gears turning…"
+        message="Pulling together projects, pipelines and everything currently on fire."
+      />
+    );
   }
 
   return (
