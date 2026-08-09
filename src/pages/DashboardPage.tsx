@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { AppState } from "../components/common/AppState/AppState";
 
@@ -18,6 +19,8 @@ const dashboardService = new DashboardService(
 );
 
 export function DashboardPage() {
+  const navigate = useNavigate();
+  
   const [dashboard, setDashboard] =
     useState<DashboardSummary | null>(null);
 
@@ -57,6 +60,31 @@ export function DashboardPage() {
         variant="loading"
         title="Getting the gears turning…"
         message="Pulling together projects, pipelines and everything currently on fire."
+      />
+    );
+  }
+
+  const isEmptyDashboard =
+    dashboard.metrics.inProgress === 0 &&
+    dashboard.metrics.awaitingQa === 0 &&
+    dashboard.metrics.releaseReady === 0 &&
+    dashboard.attentionItems.length === 0 &&
+    dashboard.activeProjects.length === 0 &&
+    dashboard.nextRelease === null;
+
+  if (isEmptyDashboard) {
+    return (
+      <AppState
+        variant="empty"
+        title="There's nothing to see here."
+        message="Get started by connecting your first project."
+        action={{
+          label: "Connect a project",
+          onClick: () => {
+            // Routes to /integrations until the project connection flow exists.
+            navigate("/integrations")
+          },
+        }}
       />
     );
   }
