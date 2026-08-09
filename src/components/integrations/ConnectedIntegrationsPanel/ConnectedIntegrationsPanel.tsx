@@ -4,10 +4,20 @@ import "./ConnectedIntegrationsPanel.css";
 
 interface ConnectedIntegrationsPanelProps {
   integrations: readonly ProjectIntegration[];
+
+  onDisconnect: (
+    integrationId: string,
+  ) => void;
+
+  onDelete: (
+    integrationId: string,
+  ) => void;
 }
 
 export function ConnectedIntegrationsPanel({
   integrations,
+  onDisconnect,
+  onDelete,
 }: ConnectedIntegrationsPanelProps) {
   return (
     <section className="connected-integrations-panel">
@@ -33,10 +43,7 @@ export function ConnectedIntegrationsPanel({
           >
             <div className="connected-integrations-panel__identity">
               <strong>{integration.name}</strong>
-
-              <span>
-                {integration.providerId}
-              </span>
+              <span>{integration.providerId}</span>
             </div>
 
             <div className="connected-integrations-panel__capabilities">
@@ -47,12 +54,35 @@ export function ConnectedIntegrationsPanel({
               ))}
             </div>
 
-            <span
-              className="connected-integrations-panel__status"
-              data-status={integration.status}
-            >
-              {integration.status}
-            </span>
+            <div className="connected-integrations-panel__controls">
+              <span
+                className="connected-integrations-panel__status"
+                data-status={integration.status}
+              >
+                {integration.status}
+              </span>
+
+              {integration.status === "connected" && (
+                <button
+                  type="button"
+                  onClick={() =>
+                    onDisconnect(integration.id)
+                  }
+                >
+                  Disconnect
+                </button>
+              )}
+
+              <button
+                type="button"
+                className="connected-integrations-panel__delete"
+                onClick={() =>
+                  onDelete(integration.id)
+                }
+              >
+                Delete
+              </button>
+            </div>
           </article>
         ))}
       </div>

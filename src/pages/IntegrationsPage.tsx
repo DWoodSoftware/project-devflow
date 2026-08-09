@@ -34,6 +34,37 @@ export function IntegrationsPage() {
     });
   }, []);
 
+  
+const handleDisconnect = async (
+  integrationId: string,
+) => {
+  await integrationService.disconnectProjectIntegration(
+    integrationId,
+  );
+
+  const updatedIntegrations =
+      await integrationService.getProjectIntegrations(
+        MOCK_PROJECT_ID,
+      );
+
+    setIntegrations(updatedIntegrations);
+  };
+
+  const handleDelete = async (
+    integrationId: string,
+  ) => {
+    await integrationService.deleteProjectIntegration(
+      integrationId,
+    );
+
+    const updatedIntegrations =
+      await integrationService.getProjectIntegrations(
+        MOCK_PROJECT_ID,
+      );
+
+    setIntegrations(updatedIntegrations);
+  };
+
   return (
     <section className="integrations-page">
       <header className="integrations-page__header">
@@ -52,6 +83,8 @@ export function IntegrationsPage() {
 
       <ConnectedIntegrationsPanel
         integrations={integrations}
+        onDisconnect={handleDisconnect}
+        onDelete={handleDelete}
       />
 
       <section>

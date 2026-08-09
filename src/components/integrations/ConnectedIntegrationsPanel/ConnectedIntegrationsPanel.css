@@ -188,6 +188,52 @@
   background: var(--color-orange-subtle);
 }
 
+.connected-integrations-panel__controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+}
+
+.connected-integrations-panel__controls button {
+  padding:
+    0.4rem
+    0.65rem;
+
+  color: var(--color-text-secondary);
+
+  font-size: 0.72rem;
+  font-weight: 600;
+
+  border:
+    0.0625rem
+    solid
+    var(--color-border);
+
+  border-radius: var(--radius-sm);
+
+  background: var(--color-surface);
+
+  cursor: pointer;
+}
+
+.connected-integrations-panel__controls button:hover {
+  color: var(--color-text-primary);
+
+  background: var(--color-surface-muted);
+}
+
+.connected-integrations-panel__delete:hover {
+  color: var(--color-danger);
+}
+
+@media (max-width: 64rem) {
+  .connected-integrations-panel__controls {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}
+
 @media (max-width: 64rem) {
   .connected-integrations-panel__item {
     grid-template-columns: 1fr;
