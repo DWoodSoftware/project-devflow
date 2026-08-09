@@ -8,6 +8,8 @@ import { IntegrationService } from "../services/integrations/IntegrationService"
 
 import { CapabilityCoverage } from "../components/integrations/CapabilityCoverage/CapabilityCoverage";
 import { ConnectedIntegrationsPanel } from "../components/integrations/ConnectedIntegrationsPanel/ConnectedIntegrationsPanel";
+import { AvailableIntegrationsPanel } from "../components/integrations/AvailableIntegrationsPanel/AvailableIntegrationsPanel";
+import { ProviderDetailsModal } from "../components/integrations/ProviderDetailsModal/ProviderDetailsModal";
 
 const integrationService = new IntegrationService(
   new MockIntegrationRepository(),
@@ -21,6 +23,9 @@ export function IntegrationsPage() {
 
   const [integrations, setIntegrations] =
     useState<readonly ProjectIntegration[]>([]);
+
+  const [selectedProvider, setSelectedProvider] =
+    useState<IntegrationProvider | null>(null);
 
   useEffect(() => {
     Promise.all([
@@ -49,6 +54,30 @@ export function IntegrationsPage() {
 
       setIntegrations(updatedIntegrations);
     };
+
+  const handleSelectProvider = (
+    provider: IntegrationProvider,
+  ) => {
+    setSelectedProvider(provider);
+  };
+
+  const handleConnectProvider = async (
+    provider: IntegrationProvider,
+  ) => {
+    await integrationService.createProjectIntegration({
+      projectId: MOCK_PROJECT_ID,
+      providerId: provider.id,
+      name: provider.name,
+    });
+
+    const updatedIntegrations =
+      await integrationService.getProjectIntegrations(
+        MOCK_PROJECT_ID,
+      );
+
+    setIntegrations(updatedIntegrations);
+    setSelectedProvider(null);
+  };
 
   const handleDelete = async (
     integrationId: string,
@@ -80,6 +109,17 @@ export function IntegrationsPage() {
     setIntegrations(updatedIntegrations);
   };
 
+  const availableProviders = providers.filter((provider) => {
+    if (provider.supportsMultipleConnections) {
+      return true;
+    }
+
+    return !integrations.some(
+      (integration) =>
+        integration.providerId === provider.id,
+    );
+  });
+
   return (
     <section className="integrations-page">
       <header className="integrations-page__header">
@@ -103,16 +143,19 @@ export function IntegrationsPage() {
         onDelete={handleDelete}
       />
 
-      <section>
-        <h2>Available integrations</h2>
+      <AvailableIntegrationsPanel
+        providers={availableProviders}
+        onSelectProvider={handleSelectProvider}
+      />
 
-        {providers.map((provider) => (
-          <article key={provider.id}>
-            <strong>{provider.name}</strong>
-            <p>{provider.description}</p>
-          </article>
-        ))}
-      </section>
+      {selectedProvider && (
+        <ProviderDetailsModal
+          provider={selectedProvider}
+          onClose={() => setSelectedProvider(null)}
+          onConnect={handleConnectProvider}
+        />
+      )}
+
     </section>
   );
 }
