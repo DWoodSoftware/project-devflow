@@ -344,3 +344,9 @@ What can the system handle itself?
 ```
 
 If DevFlow can answer those questions reliably across a real software project, it is doing its job.
+
+## Licence
+
+This project is proprietary and is not licensed for reuse, redistribution, or commercial use.
+
+Source is publicly visible for development and portfolio purposes only.
